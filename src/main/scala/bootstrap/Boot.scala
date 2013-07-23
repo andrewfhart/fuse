@@ -18,6 +18,9 @@ package bootstrap.liftweb
 import net.liftweb.http.{Html5Properties, LiftRules, Req}
 import net.liftweb.sitemap.{Menu, SiteMap}
 
+import org.apache.oodt.fuse.lib.FuseApi
+
+
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
@@ -26,6 +29,9 @@ class Boot {
   def boot {
     // where to search snippet
     LiftRules.addToPackages("org.apache.oodt.fuse")
+    
+    // Include the url rules for the Fuse API
+    LiftRules.statelessDispatchTable.append(FuseApi)
 
     // Build SiteMap
     def sitemap(): SiteMap = SiteMap(
